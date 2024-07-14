@@ -1,26 +1,39 @@
 import User from '../models/user.js'; 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
+import { generatePath } from 'react-router';
+
 // test api
 const test = (req,res)=>{
     res.json('This is test APi')
 }
+const generateToken = user=>{
+    return jwt.sign({id:user._id},process.env.JWT_SECRET_KEY,{
+        expiresIn:"15d",
+    })
+}
 //login user
 export const loginUser= async(req,res)=>{
-    const{name,email,password}=req.body
+    const{email}=req.body
 
     try {
-        const user= await User.findOne({email:email})
+        let user =null
+        user= await User.findOne({email})
         if(!user){
-            res.json("not_exist")
+            return res.status(400).json({message:"UIser doesn't exist"})
         }
-    const isMatch = await bcrypt.compare(password, check.email);
+    const isMatch = await bcrypt.compare(req.body.password, user.password);
     if(!isMatch){
-        return res.json("Invalid");
+        return res.status(400).json({status: false,message:" login Invalid"});
+        
     }
-    res.json("exist");
+    // token
+    const token = generateToken(user);
+
+    res.status(200).json({message:"Login successfull"});
 }catch(e){
     res.status(500).json({error:'failed to login'});
+    console.log(e);
 }
 }
 
@@ -50,7 +63,7 @@ export const registerUser = async(req, res)=>{
     res.status(200).json({success:true, message:'User successfully Register'})
     } catch (e) {
         res.status(500).json({success:false, message:'Register error'})
-        console.log(e);
+        
     }
 
 }
