@@ -12,7 +12,12 @@ import MenuCard from "./layouts/MenuCard";
 import LearnMore from "./LearnMore/LearnMore";
 import Quiz from "./pages/Quiz";
 import Review from "./Review/Review";
-import ContactUsPage from "./ContactUs/ContactUsPage"
+import ContactUsPage from "./ContactUs/ContactUsPage";
+import EnrollNowForEnglish from "./Enroll Now/Enroll-Now-For-English";
+import EnrollNowForBangla from "./Enroll Now/Enroll-Now-For-Bangla";
+import EnrollNowForJapanese from "./Enroll Now/Enroll-Now-For-Japanese";
+import EnrollNowForTurkish from "./Enroll Now/Enroll-Now-For-Turkish";
+import EnrollNowForKorean from "./Enroll Now/Enroll-Now-For-Korean";
 const App = () => {
   return (
     <Router>
@@ -31,6 +36,12 @@ const App = () => {
             <Route element={<Review />} path="/reviews" /> 
             <Route element={<LearnMore />} path="/learn-more" />
             <Route element={<ContactUsPage />} path="/contact" />
+            <Route path="/enroll-now-for-english" element={<EnrollNowForEnglish />} />
+            <Route path="/enroll-now-for-bangla" element={<EnrollNowForBangla />} />
+            <Route path="/enroll-now-for-japanese" element={<EnrollNowForJapanese />} />
+            <Route path="/enroll-now-for-turkish" element={<EnrollNowForTurkish />} />
+             <Route path="/enroll-now-for-korean" element={<EnrollNowForKorean />} />
+            
           </Routes>
           
         </main>
