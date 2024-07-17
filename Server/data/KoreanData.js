@@ -1,16 +1,19 @@
-// data/KoreanData.js
-
-import KoreanWord from '../models/Words/KoreanWord.js';
+import KoreanWord from "../models/Words/KoreanWord.js";
 
 export const addKoreanWord = async (req, res) => {
-  const { word, meaning } = req.body;
-
+  /*
+    wordList is an array, each element of this array 
+    is an object of KoreanWord
+  */
+  const { wordList } = req.body;
   try {
-    const newKoreanWord = await KoreanWord.create({ word, meaning });
-    return res.status(201).json(newKoreanWord);
+    const newKoreanWord = await KoreanWord.insertMany(wordList);
+    // newKoreanWord is an array of newly added KoreanWords
+    //console.log(newKoreanWord);
+    return res.status(201).json({ message: "Korean words added successfully" });
   } catch (error) {
-    console.error("Error adding Korean word:", error);
-    return res.status(500).json({ error: "Failed to add Korean word" });
+    console.error("Error adding Korean word: ", error);
+    return res.status(500).json({ error: "Error adding Korean words" });
   }
 };
 

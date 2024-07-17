@@ -1,6 +1,6 @@
 // models/JapaneseWord.js
 
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const JapaneseWordSchema = new mongoose.Schema({
   word: {
@@ -12,7 +12,7 @@ const JapaneseWordSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  pronounciation:{
+  pronunciation: {
     type: String,
     required: true,
   },
@@ -22,6 +22,6 @@ const JapaneseWordSchema = new mongoose.Schema({
   },
 });
 
-const JapaneseWord = mongoose.model('JapaneseWord', JapaneseWordSchema);
+const JapaneseWord = mongoose.model("JapaneseWord", JapaneseWordSchema);
 
 export default JapaneseWord;

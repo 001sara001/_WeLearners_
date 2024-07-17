@@ -1,16 +1,19 @@
-// data/BanglaData.js
-
-import BanglaWord from '../models/Words/BanglaWord.js';
+import BanglaWord from "../models/Words/BanglaWord.js";
 
 export const addBanglaWord = async (req, res) => {
-  const { word, meaning } = req.body;
-
+  /*
+    wordList is an array, each element of this array 
+    is an object of BanglaWord
+  */
+  const { banglawordList } = req.body;
   try {
-    const newBanglaWord = await BanglaWord.create({ word, meaning });
-    return res.status(201).json(newBanglaWord);
+    const newBanglaWord = await BanglaWord.insertMany(banglawordList);
+    // newBanglaWord is an array of newly added BanglaWords
+    //console.log(newBanglaWord);
+    return res.status(201).json({ message: "Bangla words added successfully" });
   } catch (error) {
-    console.error("Error adding Bangla word:", error);
-    return res.status(500).json({ error: "Failed to add Bangla word" });
+    console.error("Error adding Bangla word: ", error);
+    return res.status(500).json({ error: "Error adding Bangla words" });
   }
 };
 

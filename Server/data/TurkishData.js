@@ -1,16 +1,19 @@
-// data/TurkishData.js
-
-import TurkishWord from '../models/Words/TurkishWord.js';
+import TurkishWord from "../models/Words/TurkishWord.js";
 
 export const addTurkishWord = async (req, res) => {
-  const { word, meaning } = req.body;
-
+  /*
+    wordList is an array, each element of this array 
+    is an object of TurkishWord
+  */
+  const { wordList } = req.body;
   try {
-    const newTurkishWord = await TurkishWord.create({ word, meaning });
-    return res.status(201).json(newTurkishWord);
+    const newTurkishWord = await TurkishWord.insertMany(wordList);
+    // newTurkishWord is an array of newly added TurkishWords
+    //console.log(newTurkishWord);
+    return res.status(201).json({ message: "Turkish words added successfully" });
   } catch (error) {
-    console.error("Error adding Turkish word:", error);
-    return res.status(500).json({ error: "Failed to add Turkish word" });
+    console.error("Error adding Turkish word: ", error);
+    return res.status(500).json({ error: "Error adding Turkish words" });
   }
 };
 

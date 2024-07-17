@@ -1,9 +1,9 @@
 .learn-more-container {
     min-height: 10vh;
-    background: linear-gradient(to right, #e0f2f1, #b2dfdb, #80cbc4);
+    background: linear-gradient(to right, rgb(185, 120, 76), rgb(185, 120, 76), #9a6765);
     padding: 1rem;
-    padding-left: 1rem; 
-    padding-right: 2rem; 
+    padding-left: 3rem; 
+    padding-right: 3rem; 
   }
   
   .learn-more-heading {
@@ -39,7 +39,7 @@
   .section-title {
     font-size: 1.875rem; /* 3xl */
     font-weight: 600; /* font-semibold */
-    color: #004d40; /* Teal 700 */
+    color: #d2afaa; /* Teal 700 */
     margin-bottom: 1rem; /* mb-4 */
   }
   
@@ -60,13 +60,7 @@
     color: #4b5563; /* Gray 700 */
     margin-bottom: 1rem; /* mb-4 */
   }
-  .section-list1 {
-    list-style-type: disc; /* Keeps the bullet point */
-    padding-left: 2rem; /* Adjust padding to control space for the disc */
-    text-indent: -0.5rem; /* Move the text closer to the left */
-    color: #4b5563; /* Gray 700 */
-    margin-bottom: 1rem; /* mb-4 */
-  }
+  
   /* Button Styles */
   .learn-more-button {
     background-color: #00897b; /* Teal 600 */

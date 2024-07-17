@@ -1,35 +1,35 @@
-/* Global Styles */
+
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f0950d; /* Light mode background color */
-    color: #000000; /* Light mode text color */
+    background-color: #f0950d; 
+    color: #000000; 
   }
   
   /* Dark Mode Styles */
   body.dark {
-    background-color: #05061f; /* Dark mode background color */
-    color: #E68369; /* Dark mode text color */
+    background-color: #05061f; 
+    color: #E68369; 
   }
   
-  /* Example for dark mode elements */
+ 
   .dark .bg-gray-800 {
-    background-color: #05061f; /* Dark mode background color for elements */
+    background-color: #05061f; 
   }
   
   .dark .text-white {
-    color: #E68369; /* Dark mode text color */
+    color: #E68369; 
   }
   
   .dark .text-black {
-    color: #000000; /* Dark mode text color */
+    color: #000000; 
   }
   
   .dark .border-gray-800 {
-    border-color: #31336b; /* Dark mode border color */
+    border-color: #31336b; 
   }
   
   .dark .bg-black {
-    background-color: #05061f; /* Dark mode background color for elements */
+    background-color: #05061f; 
   }
   
   .dark .text-blue-500 {
@@ -40,9 +40,9 @@ body {
     color: #31336b; /* Dark mode link hover color */
   }
   
-  /* Ensure that Tailwind's base styles don't conflict with your custom styles */
+ 
   @layer base {
-    /* Dark mode styles for specific elements */
+    
     .dark .bg-gray-800 {
       background-color: #05061f;
     }

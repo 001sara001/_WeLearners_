@@ -1,16 +1,19 @@
-// data/Data.js
-
-import Word from '../models/Words/Word.js';
+import Word from "../models/Words/Word.js";
 
 export const addWord = async (req, res) => {
-  const { word, meaning } = req.body;
-
+  /*
+    wordList is an array, each element of this array 
+    is an object of Word
+  */
+  const { wordList } = req.body;
   try {
-    const newWord = await Word.create({ word, meaning });
-    return res.status(201).json(newWord);
+    const newWord = await Word.insertMany(wordList);
+    // newWord is an array of newly added Words
+    //console.log(newWord);
+    return res.status(201).json({ message: " words added successfully" });
   } catch (error) {
-    console.error("Error adding  word:", error);
-    return res.status(500).json({ error: "Failed to add  word" });
+    console.error("Error adding  word: ", error);
+    return res.status(500).json({ error: "Error adding  words" });
   }
 };
 
