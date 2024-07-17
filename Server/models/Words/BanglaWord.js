@@ -1,6 +1,6 @@
 // models/BanglaWord.js
 
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const BanglaWordSchema = new mongoose.Schema({
   word: {
@@ -12,7 +12,7 @@ const BanglaWordSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  pronounciation:{
+  translation: {
     type: String,
     required: true,
   },
@@ -22,6 +22,6 @@ const BanglaWordSchema = new mongoose.Schema({
   },
 });
 
-const BanglaWord = mongoose.model('BanglaWord', BanglaWordSchema);
+const BanglaWord = mongoose.model("BanglaWord", BanglaWordSchema);
 
 export default BanglaWord;

@@ -1,6 +1,6 @@
 // models/KoreanWord.js
 
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const KoreanWordSchema = new mongoose.Schema({
   word: {
@@ -12,7 +12,7 @@ const KoreanWordSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  pronounciation:{
+  pronunciation: {
     type: String,
     required: true,
   },
@@ -22,6 +22,6 @@ const KoreanWordSchema = new mongoose.Schema({
   },
 });
 
-const KoreanWord = mongoose.model('KoreanWord', KoreanWordSchema);
+const KoreanWord = mongoose.model("KoreanWord", KoreanWordSchema);
 
 export default KoreanWord;
