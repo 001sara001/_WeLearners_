@@ -1,10 +1,11 @@
-// src/pages/EnrollNowForBangla.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../styles/Enroll-Now-For-Bangla.css';  // Import the CSS file for Bangla page
 
 const EnrollNowForBangla = () => {
   const [selectedLevel, setSelectedLevel] = useState('');
   const [feedback, setFeedback] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleLevelChange = (level) => {
     setSelectedLevel(level);
@@ -12,8 +13,11 @@ const EnrollNowForBangla = () => {
 
   const handleSubmit = () => {
     if (selectedLevel) {
-      alert(`Enrolled in ${selectedLevel} level for Bangla. Feedback: ${feedback}`);
-      // Here you can add logic to handle form submission
+      // Perform your form submission logic here if needed
+      // alert(`Enrolled in ${selectedLevel} level for Bangla. Feedback: ${feedback}`);
+      
+      // Navigate to the Review page
+      navigate("/reviews");
     } else {
       alert('Please select a level before submitting.');
     }
@@ -21,7 +25,7 @@ const EnrollNowForBangla = () => {
 
   return (
     <div className="enroll-now-for-bangla-container">
-      <h1 className="enroll-now-for-bangla-heading">Enrolled in Bangla Course</h1>
+      <h1 className="enroll-now-for-bangla-heading">Enroll in Bangla Course</h1>
       <p className="enroll-now-for-bangla-description">
         Choose the level that best suits your needs and let us know how we can improve.
       </p>
