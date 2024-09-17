@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import authoController from "../controller/authoController.js";
-import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -14,9 +13,7 @@ router.use(
 );
 
 router.get("/", authoController.test);
-router.get("/", cors(), (req, res) => {
-  res.send("Hello from route");
-});
 router.post("/login", authoController.loginUser);
 router.post("/register", authoController.registerUser);
+
 export default router;

@@ -1,61 +1,68 @@
 import User from '../models/user.js'; 
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+
 // test api
-const test = (req,res)=>{
-    res.json('This is test APi')
-}
-//login user
-export const loginUser= async(req,res)=>{
-    const{name,email,password}=req.body
+const test = (req, res) => {
+    res.json('This is test API');
+};
 
-    try {
-        const user= await User.findOne({email:email})
-        if(!user){
-            res.json("not_exist")
-        }
-    const isMatch = await bcrypt.compare(password, check.email);
-    if(!isMatch){
-        return res.json("Invalid");
+const generateToken = user => {
+    return jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {
+        expiresIn: "15d",
+    });
+};
+
+// login user
+export const loginUser = async (req, res) => {
+  const { email, password } = req.body; // No name field needed here
+
+  try {
+      const user = await User.findOne({ email });
+      if (!user) {
+          return res.status(400).json({ message: "User doesn't exist" });
+      }
+      
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+          return res.status(400).json({ message: "Invalid" });
+      }
+
+      const token = generateToken(user);
+      res.status(200).json({ message: "Login successful", token }); // Return the token to the client
+  } catch (e) {
+      res.status(500).json({ message: 'Failed to login' });
+  }
+};
+
+
+// Register User
+export const registerUser = async (req, res) => {
+  const { name, email, password, picture } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ message: "User already exists" });
     }
-    res.json("exist");
-}catch(e){
-    res.status(500).json({error:'failed to login'});
-}
-}
 
-
-// register user 
-export const registerUser = async(req, res)=>{
-    const{name,email,password}=req.body
-
-
-    try {
-        let newUser = null
-        // if user exist
-        newUser= await User.findOne({email})
-        if(newUser){
-            return res.status(400).json({message:"User already exist"})
-        }
-        // if user doesn't exist
-        console.log(password);
-    const hashedPassword= await bcrypt.hash(password,10);
-    newUser = new User({
-        name,
-        email,
-        password:hashedPassword
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user = new User({
+      name,
+      email,
+      password: hashedPassword,
+      picture, // Store the picture URL in the DB
     });
 
-    await newUser.save()
-    res.status(200).json({success:true, message:'User successfully Register'})
-    } catch (e) {
-        res.status(500).json({success:false, message:'Register error'})
-        console.log(e);
-    }
+    await user.save();
+    res.status(200).json({ success: true, message: 'User successfully registered' });
+  } catch (e) {
+    res.status(500).json({ success: false, message: 'Register error' });
+  }
+};
 
-}
 export default {
     test,
     registerUser,
     loginUser,
-  };
+};
