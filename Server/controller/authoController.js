@@ -2,7 +2,7 @@ import User from '../models/user.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-// test api
+// test API
 const test = (req, res) => {
     res.json('This is test API');
 };
@@ -15,54 +15,54 @@ const generateToken = user => {
 
 // login user
 export const loginUser = async (req, res) => {
-  const { email, password } = req.body; // No name field needed here
+    const { email, password } = req.body;
 
-  try {
-      const user = await User.findOne({ email });
-      if (!user) {
-          return res.status(400).json({ message: "User doesn't exist" });
-      }
-      
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-          return res.status(400).json({ message: "Invalid" });
-      }
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ message: "User doesn't exist" });
+        }
+        
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: "Login Invalid" });
+        }
 
-      const token = generateToken(user);
-      res.status(200).json({ message: "Login successful", token }); // Return the token to the client
-  } catch (e) {
-      res.status(500).json({ message: 'Failed to login' });
-  }
+        const token = generateToken(user);
+        res.status(200).json({ message: "Login successful", token });
+    } catch (e) {
+        console.error('Login Error:' , e);
+        res.status(500).json({ error: 'Failed to login'});
+    }
 };
 
-
-// Register User
+// register user 
 export const registerUser = async (req, res) => {
-  const { name, email, password, picture } = req.body;
+    const { name, email, password, picture } = req.body; // Correct field name for picture
 
-  try {
-    let user = await User.findOne({ email });
-    if (user) {
-      return res.status(400).json({ message: "User already exists" });
+    try {
+        let user = await User.findOne({ email });
+        if (user) {
+            return res.status(400).json({ message: "User already exists" });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        user = new User({
+            name,
+            email,
+            password: hashedPassword,
+            picture, // Save the Cloudinary URL
+        });
+
+        await user.save();
+        res.status(200).json({ success: true, message: 'User successfully registered' });
+    } catch (e) {
+        res.status(500).json({ success: false, message: 'Register error' });
     }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    user = new User({
-      name,
-      email,
-      password: hashedPassword,
-      picture, // Store the picture URL in the DB
-    });
-
-    await user.save();
-    res.status(200).json({ success: true, message: 'User successfully registered' });
-  } catch (e) {
-    res.status(500).json({ success: false, message: 'Register error' });
-  }
 };
 
 export default {
     test,
     registerUser,
-    loginUser,
+    loginUser, 
 };
