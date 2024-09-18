@@ -1,15 +1,24 @@
 import User from '../models/user.js'; 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+//require('dotenv').config(); 
 
 // test API
 const test = (req, res) => {
     res.json('This is test API');
 };
 
+// const generateToken = user => {
+//     return jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {
+//         expiresIn: "15d",
+//     });
+// };
 const generateToken = user => {
+    if (!process.env.JWT_SECRET_KEY) {
+        throw new Error('JWT_SECRET_KEY is not defined in the environment variables.');
+    }
     return jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: "15d",
+        expiresIn: "15d",  // Adjust token expiry as per your needs
     });
 };
 
