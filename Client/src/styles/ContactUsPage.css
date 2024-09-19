@@ -1,0 +1,74 @@
+/* styles/ContactUsPage.css */
+
+/* General Page Styles */
+.contact-us-container {
+  min-height: 100vh;
+  background: linear-gradient(to right, rgb(185, 120, 76), rgb(185, 120, 76), #9a6765);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.contact-us-heading {
+  font-size: 2.5rem; /* 4xl */
+  font-weight: bold;
+  color: #004d40; /* Teal 800 */
+  text-align: center;
+}
+
+.contact-us-form {
+  width: 100%;
+  max-width: 600px; /* max-w-2xl */
+  background-color: #ffffff; /* White background for form */
+  padding: 2rem;
+  border-radius: 0.5rem; /* rounded-md */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+}
+
+.form-group label {
+  font-size: 1rem; /* text-base */
+  color: #374151; /* Gray 800 */
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.input-field {
+  width: 100%;
+  padding: 1rem; /* p-4 */
+  border-radius: 0.5rem; /* rounded-md */
+  border: 1px solid #7a4018; /* Teal 800 */
+  margin-bottom: 1rem;
+  font-size: 1rem; /* text-base */
+  color: #374151; /* Gray 800 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+}
+
+.input-field:focus {
+  border-color: #00796b; /* Teal 700 */
+  outline: none;
+}
+
+.submit-button {
+  background-color: #7a4018; /* Teal 600 */
+  color: #ffffff; /* White */
+  padding: 1rem 2rem; /* py-4 px-6 */
+  border-radius: 0.5rem; /* rounded-md */
+  border: none;
+  cursor: pointer;
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600; /* font-semibold */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #bc7542; /* Teal 700 */
+  transform: scale(1.05); /* scale-105 */
+}
+
+/* Ensure the button is not being hidden */
+.submit-button {
+  display: block; /* Ensure it is not set to display: none */
+}

@@ -2,14 +2,15 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
     "start-dev": "nodemon index.js"
   },
-  
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -23,8 +24,6 @@
     "js": "^0.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.8.0",
-    "mongoose": "^8.5.0",
-    "nodemon": "^3.1.4"
+    "mongoose": "^8.5.0"
   }
-  
 }

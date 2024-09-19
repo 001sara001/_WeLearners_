@@ -1,3 +1,4 @@
+//server/indexs.js
 import express, { Router } from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -37,4 +38,4 @@ mongoose
 // Server setup
 const port = 8000;
 
-app.listen(port, () => console.log(`${port}`));
+app.listen(port, () => console.log(${port}));

@@ -1,0 +1,33 @@
+.review-container {
+    min-height: 10vh;
+    background: linear-gradient(to right, rgb(185, 120, 76), rgb(185, 120, 76), #9a6765);
+    padding: 1rem;
+    padding-left: 1rem; 
+    padding-right: 2rem; 
+  }
+  
+  .review-heading {
+    font-size: 2.5rem; 
+    font-weight: bold;
+    text-align: center;
+    color: #374151; 
+    margin-top: 2.5rem; 
+    margin-bottom: 3rem;
+    padding-top:40px; 
+  }
+  
+  
+  /* Flex Items */
+  .section-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .section-item2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* gap-8 */
+    margin-top: 20px;
+
+  }
+  
