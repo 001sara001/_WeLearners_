@@ -3,56 +3,56 @@ import { IoCloseOutline, IoMailOutline, IoLockClosedOutline } from "react-icons/
 import "../styles/Login.css";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { authContext } from '../context/AuthContext.jsx';
+// import { authContext } from '../context/AuthContext.jsx'; // Uncomment if using auth context
 
 export default function Login() {
   const navigate = useNavigate();
-  const { dispatch } = useContext(authContext);
+  // const { dispatch } = useContext(authContext); // Uncomment if using auth context
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // State to store user input
   const [data, setData] = useState({
     email: '',   
     password: '',
   });
 
+  // Function to handle form submission
   const loginUser = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError(''); // Reset error message before new login attempt
 
     try {
+      // Send login request to the backend
       const res = await axios.post("http://localhost:8000/auth/login", data);
-      const { result } = res.data;  // The backend will return a token
 
-      if (res.status === 200) {
-        // Save token to localStorage or context for authorization
+      // Extract token from response
+      const { token, message } = res.data;
+
+      // Check if response status is 200 (successful login)
+      if (res.status === 200 && token) {
+        // Save token to local storage
         localStorage.setItem('token', token);
 
-        
-  
-        dispatch({
-          type: 'LOGIN_SUCCESS',
-          payload: {
-            user: result.data,
-            token: token,
-          },
-        });
-        
+        // Dispatch login success action (if using context)
+        // Uncomment the lines below if using auth context
+        // dispatch({
+        //   type: 'LOGIN_SUCCESS',
+        //   payload: { token },
+        // });
 
-
-        // Redirect user to home page
+        // Navigate to the home page
         navigate('/');
-
       } else {
-        throw new Error(res.data.message);
+        throw new Error(message || 'Login failed. Please try again.');
       }
-
-      setLoading(false);
     } catch (e) {
+      // Capture and display the error message
+      console.error('Login Error:', e.response?.data || e.message);
       setError(e.response?.data?.message || "Login failed. Please try again.");
-      setLoading(false);
-      
+    } finally {
+      setLoading(false); // Stop loading regardless of the outcome
     }
   };
 
@@ -61,11 +61,12 @@ export default function Login() {
       <div className="wrapper">
         <div className="login-box" id="login-box">
           <form onSubmit={loginUser}>
-            <h2 >LogIn</h2>
+            <h2>Log In</h2>
             <span className="icon-close" id="login-close">
               <IoCloseOutline />
             </span>
 
+            {/* Email Input */}
             <div className="input-box">
               <span className="icon">
                 <IoMailOutline />
@@ -79,6 +80,7 @@ export default function Login() {
               <label>Email</label>
             </div>
 
+            {/* Password Input */}
             <div className="input-box">
               <span className="icon">
                 <IoLockClosedOutline />
@@ -92,6 +94,7 @@ export default function Login() {
               <label>Password</label>
             </div>
 
+            {/* Remember Me and Forgot Password */}
             <div className="remember-forgot">
               <label>
                 <input type="checkbox" />
@@ -100,12 +103,15 @@ export default function Login() {
               <a href="#">Forgot Password</a>
             </div>
 
+            {/* Submit Button */}
             <button type="submit" disabled={loading}>
               {loading ? 'Logging in...' : 'Login'}
             </button>
 
+            {/* Display Error Message */}
             {error && <p className="error-message">{error}</p>}
 
+            {/* Register Link */}
             <div className="register-link">
               <p>
                 Don't have an account? <Link to="/register">Register</Link>
